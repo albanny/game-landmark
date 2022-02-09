@@ -1,0 +1,24 @@
+type LandmarkType @entity {
+  id: ID!
+
+  landmarkType: BigInt!
+
+  landmarks: [Landmark]! @derivedFrom(field: "landmarkType")
+}
+
+type Account @entity {
+  id: ID!
+
+  balance: BigInt!
+
+  landmarks: [Landmark]! @derivedFrom(field: "account")
+}
+
+type Landmark @entity {
+  id: ID!
+
+  account: Account!
+  tokenId: BigInt!
+  category: BigInt!
+  landmarkType: LandmarkType!
+}
