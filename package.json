@@ -1,11 +1,11 @@
 {
-  "name": "game-landmark",
+  "name": "landmarks",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "codegen": "graph codegen --debug --output-dir src/entities/",
     "build": "graph build",
-    "deploy": "graph deploy --product hosted-service albanny/game-landmark\n",
+    "deploy": "graph deploy --product hosted-service albanny/landmarks\n",
     "auth": "graph auth --studio 2579958cb87c4a718d0493d42454ea42"
   },
   "dependencies": {
