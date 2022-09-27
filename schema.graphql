@@ -1,17 +1,13 @@
-type LandmarkType @entity {
+type Global @entity {
   id: ID!
-
-  landmarkType: BigInt!
-
-  landmarks: [Landmark]! @derivedFrom(field: "landmarkType")
+  value: BigInt!
 }
 
 type Account @entity {
   id: ID!
 
-  balance: BigInt!
-
   landmarks: [Landmark]! @derivedFrom(field: "account")
+  landmarkStakings: [LandmarkStaking]! @derivedFrom(field: "account")
 }
 
 type Landmark @entity {
@@ -20,5 +16,14 @@ type Landmark @entity {
   account: Account!
   tokenId: BigInt!
   category: BigInt!
-  landmarkType: LandmarkType!
+  amount: BigInt!
+}
+
+type LandmarkStaking @entity {
+  id: ID!
+
+  tokenId: BigInt!
+  category: BigInt!
+  amount: BigInt!
+  account: Account!
 }

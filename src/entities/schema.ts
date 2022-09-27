@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class LandmarkType extends Entity {
+export class Global extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class LandmarkType extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save LandmarkType entity without an ID");
+    assert(id !== null, "Cannot save Global entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save LandmarkType entity with non-string ID. " +
+      "Cannot save Global entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("LandmarkType", id.toString(), this);
+    store.set("Global", id.toString(), this);
   }
 
-  static load(id: string): LandmarkType | null {
-    return store.get("LandmarkType", id) as LandmarkType | null;
+  static load(id: string): Global | null {
+    return store.get("Global", id) as Global | null;
   }
 
   get id(): string {
@@ -42,22 +42,13 @@ export class LandmarkType extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get landmarkType(): BigInt {
-    let value = this.get("landmarkType");
+  get value(): BigInt {
+    let value = this.get("value");
     return value.toBigInt();
   }
 
-  set landmarkType(value: BigInt) {
-    this.set("landmarkType", Value.fromBigInt(value));
-  }
-
-  get landmarks(): Array<string | null> {
-    let value = this.get("landmarks");
-    return value.toStringArray();
-  }
-
-  set landmarks(value: Array<string | null>) {
-    this.set("landmarks", Value.fromStringArray(value));
+  set value(value: BigInt) {
+    this.set("value", Value.fromBigInt(value));
   }
 }
 
@@ -91,15 +82,6 @@ export class Account extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get balance(): BigInt {
-    let value = this.get("balance");
-    return value.toBigInt();
-  }
-
-  set balance(value: BigInt) {
-    this.set("balance", Value.fromBigInt(value));
-  }
-
   get landmarks(): Array<string | null> {
     let value = this.get("landmarks");
     return value.toStringArray();
@@ -107,6 +89,15 @@ export class Account extends Entity {
 
   set landmarks(value: Array<string | null>) {
     this.set("landmarks", Value.fromStringArray(value));
+  }
+
+  get landmarkStakings(): Array<string | null> {
+    let value = this.get("landmarkStakings");
+    return value.toStringArray();
+  }
+
+  set landmarkStakings(value: Array<string | null>) {
+    this.set("landmarkStakings", Value.fromStringArray(value));
   }
 }
 
@@ -167,12 +158,79 @@ export class Landmark extends Entity {
     this.set("category", Value.fromBigInt(value));
   }
 
-  get landmarkType(): string {
-    let value = this.get("landmarkType");
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+}
+
+export class LandmarkStaking extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save LandmarkStaking entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save LandmarkStaking entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("LandmarkStaking", id.toString(), this);
+  }
+
+  static load(id: string): LandmarkStaking | null {
+    return store.get("LandmarkStaking", id) as LandmarkStaking | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
     return value.toString();
   }
 
-  set landmarkType(value: string) {
-    this.set("landmarkType", Value.fromString(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get tokenId(): BigInt {
+    let value = this.get("tokenId");
+    return value.toBigInt();
+  }
+
+  set tokenId(value: BigInt) {
+    this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get category(): BigInt {
+    let value = this.get("category");
+    return value.toBigInt();
+  }
+
+  set category(value: BigInt) {
+    this.set("category", Value.fromBigInt(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get account(): string {
+    let value = this.get("account");
+    return value.toString();
+  }
+
+  set account(value: string) {
+    this.set("account", Value.fromString(value));
   }
 }
